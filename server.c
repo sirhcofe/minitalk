@@ -6,7 +6,7 @@
 /*   By: chenlee <chenlee@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 01:39:05 by chenlee           #+#    #+#             */
-/*   Updated: 2022/10/25 15:29:03 by chenlee          ###   ########.fr       */
+/*   Updated: 2022/10/28 18:37:12 by chenlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	terminate_server(int signal)
 	}
 }
 
+
 void	action_is_coming(int signal, siginfo_t *sa_siginfo, void *ucontext)
 {
 	static int	bit_count;
@@ -36,19 +37,23 @@ void	action_is_coming(int signal, siginfo_t *sa_siginfo, void *ucontext)
 		bit = 0;
 	c += bit;
 	bit_count++;
+	printf("%d\n", bit);
 	if (bit_count == 8)
 	{
-		write(1, &c, 1);
+		write(1, "\n", 1);
+		// write(1, &c, 1);
 		if (c == '\0')
 		{
 			write(1, "\n", 1);
-			kill(sa_siginfo->si_pid, SIGUSR1);
+			// kill(sa_siginfo->si_pid, SIGUSR1);
 		}
 		bit_count = 0;
 		c = 0;
 	}
 	else
 		c <<= 1;
+	printf("sending siguser2 to pid %d\n", sa_siginfo->si_pid);
+	kill(sa_siginfo->si_pid, SIGUSR2);
 }
 
 int	main(void)
@@ -67,3 +72,6 @@ int	main(void)
 		;
 	return (0);
 }
+
+// sigemptyset(&control_signal.sa_mask);
+// sigaddset(&control_signal.sa_mask, SIGINT);
