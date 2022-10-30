@@ -6,7 +6,7 @@
 /*   By: chenlee <chenlee@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 01:39:05 by chenlee           #+#    #+#             */
-/*   Updated: 2022/10/30 15:39:51 by chenlee          ###   ########.fr       */
+/*   Updated: 2022/10/30 19:11:36 by chenlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,20 @@ void	terminate_server(int signal)
 	}
 }
 
+/**
+ * The first is of type 'int' that contains the signal type for which this
+ * function is being invoked. 
+ *  ...
+ * The second is of type 'pointer to siginfo_t' where the siginfo_t contain
+ * additional information about the source of the signal.
+ *  ...
+ * The third is of type 'pointer to void' but actually points to a ucontext_t
+ * containing the information at the time of the signal interrupt.
+ * 
+ * The ucontext_t type is a structure type suitable for holding the context
+ * for a user thread of execution. A thread's context includes its stack,
+ * saved registers, and list of blocked signals.
+ */
 void	action_is_coming(int signal, siginfo_t *sa_siginfo, void *ucontext)
 {
 	static int	bit_count;
