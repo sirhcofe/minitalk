@@ -6,14 +6,14 @@
 #    By: chenlee <chenlee@student.42kl.edu.my>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/17 11:02:42 by chenlee           #+#    #+#              #
-#    Updated: 2022/10/25 15:28:10 by chenlee          ###   ########.fr        #
+#    Updated: 2022/10/30 15:40:36 by chenlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-LIBFT	= libft/libft.a
+LIBFT		= libft/libft.a
 
-CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror
 
 all:	client server
 

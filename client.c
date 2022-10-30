@@ -6,21 +6,19 @@
 /*   By: chenlee <chenlee@student.42kl.edu.my>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 01:38:50 by chenlee           #+#    #+#             */
-/*   Updated: 2022/10/28 18:36:05 by chenlee          ###   ########.fr       */
+/*   Updated: 2022/10/30 15:30:36 by chenlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-#include <stdlib.h>
 
 void	msg_recv(int signal)
 {
 	if (signal == SIGUSR1)
 		write(1, "Message received!\n", 18);
 	else if (signal == SIGUSR2)
-	{
-		ft_putstr_fd("suguser2 rec\n", 1);
-	}
+		;
+	return ;
 }
 
 void	send_bit(int pid, char c)
@@ -36,8 +34,7 @@ void	send_bit(int pid, char c)
 			kill(pid, SIGUSR2);
 		bit_count--;
 		pause();
-		usleep(500);
-		ft_putstr_fd("pause ret\n", 1);
+		usleep(700);
 	}
 }
 
@@ -47,10 +44,7 @@ void	send_msg(int pid, char *str)
 
 	i = -1;
 	while (str[++i] != '\0')
-	{
 		send_bit(pid, str[i]);
-		write(1, &str[i], 1);
-	}
 	send_bit(pid, str[i]);
 }
 
